@@ -15,18 +15,18 @@ export default function GlassLensCursor() {
       if (!isVisible) setIsVisible(true);
 
       // Dynamically detect if hover target is interactive to trigger custom lens scale expansion
-      const target = e.target as HTMLElement | null;
+      const target = e.target as Element | null;
       const isInteractive = !!(
-        target && (
-          target.tagName === 'BUTTON' ||
+        target &&
+        typeof target.closest === 'function' &&
+        (target.tagName === 'BUTTON' ||
           target.tagName === 'A' ||
           target.tagName === 'INPUT' ||
           target.tagName === 'SELECT' ||
           target.tagName === 'TEXTAREA' ||
           target.closest('button') ||
           target.closest('a') ||
-          target.classList.contains('cursor-pointer')
-        )
+          (target.classList && typeof target.classList.contains === 'function' && target.classList.contains('cursor-pointer')))
       );
       setIsHoveringClickable(isInteractive);
     };
