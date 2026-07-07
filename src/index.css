@@ -172,3 +172,19 @@ body {
   animation: pulse-subtle 2s infinite ease-in-out;
 }
 
+/* Hide standard cursor on desktop screens where the custom lens cursor runs */
+@media (min-width: 768px) {
+  body, 
+  button, 
+  a, 
+  input, 
+  select, 
+  textarea, 
+  [role="button"], 
+  .cursor-pointer,
+  .liquid-btn,
+  .glass {
+    cursor: none !important;
+  }
+}
+

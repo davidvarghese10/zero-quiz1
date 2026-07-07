@@ -57,24 +57,24 @@ export default function GlassLensCursor() {
         isVisible ? 'opacity-100' : 'opacity-0'
       }`}
       style={{
-        width: '44px',
-        height: '44px',
-        marginLeft: '-22px',
-        marginTop: '-22px',
+        width: '24px',
+        height: '24px',
+        marginLeft: '-12px',
+        marginTop: '-12px',
         willChange: 'transform',
       }}
     >
       {/* Outer liquid lens with reflection highlights */}
       <div
-        className={`w-full h-full rounded-full border border-white/30 backdrop-blur-[4px] shadow-[0_8px_32px_0_rgba(14,165,233,0.25),inset_0_2px_6px_0_rgba(255,255,255,0.4),inset_0_-4px_8px_0_rgba(0,0,0,0.15)] transition-all duration-300 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] ${
+        className={`w-full h-full rounded-full border border-white/15 backdrop-blur-[2px] shadow-[0_4px_16px_0_rgba(14,165,233,0.1),inset_0_1px_3px_0_rgba(255,255,255,0.2),inset_0_-2px_4px_0_rgba(0,0,0,0.08)] transition-all duration-300 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] ${
           isHoveringClickable
-            ? 'scale-150 border-sky-400/60 bg-sky-500/10 shadow-[0_12px_40px_0_rgba(56,189,248,0.45),inset_0_2px_8px_0_rgba(255,255,255,0.5)]'
-            : 'scale-100 bg-white/5'
+            ? 'scale-[1.6] border-sky-400/30 bg-sky-500/5 shadow-[0_8px_24px_0_rgba(56,189,248,0.2),inset_0_1.5px_4px_0_rgba(255,255,255,0.35)]'
+            : 'scale-100 bg-white/[0.02]'
         }`}
       >
         {/* iOS style specular bubble reflection glint */}
-        <div className="absolute top-1.5 left-2 w-3 h-1.5 bg-white/40 rounded-full rotate-[-15deg] blur-[0.5px]" />
-        <div className="absolute bottom-2 right-2.5 w-1.5 h-1.5 bg-sky-300/30 rounded-full blur-[0.2px]" />
+        <div className="absolute top-1 left-1 w-2 h-1 bg-white/25 rounded-full rotate-[-15deg] blur-[0.2px]" />
+        <div className="absolute bottom-1 right-1 w-1 h-1 bg-sky-300/10 rounded-full blur-[0.1px]" />
       </div>
     </div>
   );
