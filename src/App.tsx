@@ -17,7 +17,7 @@ export default function App() {
   const [activeTeamIndex, setActiveTeamIndex] = useState<number>(0);
   const [currentQuestionId, setCurrentQuestionId] = useState<string | null>(null);
   const [quizStarted, setQuizStarted] = useState<boolean>(false);
-  const [activeTab, setActiveTab] = useState<'board' | 'admin'>('board');
+  const [activeTab, setActiveTab] = useState<'board' | 'standings' | 'admin'>('board');
   const [projectorMode, setProjectorMode] = useState<boolean>(false);
   const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
 
@@ -426,7 +426,19 @@ export default function App() {
                 id="tab-btn-board"
               >
                 <LayoutGrid className="w-3.5 h-3.5" />
-                <span>Play Board</span>
+                <span>Quiz Board</span>
+              </button>
+              <button
+                onClick={() => setActiveTab('standings')}
+                className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                  activeTab === 'standings'
+                    ? 'bg-sky-400 text-slate-950 shadow-md'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+                id="tab-btn-standings"
+              >
+                <Trophy className="w-3.5 h-3.5" />
+                <span>Live Standings</span>
               </button>
               <button
                 onClick={() => setActiveTab('admin')}
@@ -571,30 +583,33 @@ export default function App() {
             </div>
           )}
 
-          {/* Tab Render: Board vs. Overrides */}
-          {activeTab === 'board' ? (
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start" id="board-grid-view">
-              <div className="lg:col-span-8" id="play-board-wrapper">
-                <QuestionGrid
-                  questions={questions}
-                  teams={teams}
-                  onSelectQuestion={handleSelectQuestion}
-                />
-              </div>
-              <div className="lg:col-span-4" id="leaderboard-wrapper">
-                <Leaderboard teams={teams} activeTeamIndex={activeTeamIndex} />
-              </div>
+          {/* Tab Render: Board vs. Standings vs. Overrides */}
+          {activeTab === 'board' && (
+            <div className="max-w-5xl mx-auto w-full" id="play-board-wrapper">
+              <QuestionGrid
+                questions={questions}
+                teams={teams}
+                onSelectQuestion={handleSelectQuestion}
+              />
             </div>
-          ) : (
-            <AdminPanel
-              teams={teams}
-              questions={questions}
-              onAddTeam={handleAddTeamMidGame}
-              onRemoveTeam={handleRemoveTeamMidGame}
-              onAdjustScore={handleAdjustScoreOverride}
-              onUpdateQuestion={handleUpdateQuestionText}
-              onResetGame={handleResetGame}
-            />
+          )}
+          {activeTab === 'standings' && (
+            <div className="max-w-4xl mx-auto w-full" id="leaderboard-wrapper">
+              <Leaderboard teams={teams} activeTeamIndex={activeTeamIndex} />
+            </div>
+          )}
+          {activeTab === 'admin' && (
+            <div className="w-full" id="admin-panel-wrapper">
+              <AdminPanel
+                teams={teams}
+                questions={questions}
+                onAddTeam={handleAddTeamMidGame}
+                onRemoveTeam={handleRemoveTeamMidGame}
+                onAdjustScore={handleAdjustScoreOverride}
+                onUpdateQuestion={handleUpdateQuestionText}
+                onResetGame={handleResetGame}
+              />
+            </div>
           )}
         </main>
       )}

@@ -54,27 +54,27 @@ export default function GlassLensCursor() {
     <div
       ref={cursorRef}
       className={`pointer-events-none fixed left-0 top-0 z-[9999] hidden md:block transition-opacity duration-300 ${
-        isVisible ? 'opacity-70' : 'opacity-0'
+        isVisible ? 'opacity-100' : 'opacity-0'
       }`}
       style={{
-        width: '24px',
-        height: '24px',
-        marginLeft: '-12px',
-        marginTop: '-12px',
+        width: '28px',
+        height: '28px',
+        marginLeft: '-14px',
+        marginTop: '-14px',
         willChange: 'transform',
       }}
     >
       {/* Outer liquid lens with reflection highlights */}
       <div
-        className={`w-full h-full rounded-full border border-white/10 backdrop-blur-[1px] shadow-[0_4px_12px_0_rgba(14,165,233,0.08),inset_0_1px_2px_0_rgba(255,255,255,0.1),inset_0_-1px_3px_0_rgba(0,0,0,0.05)] transition-all duration-300 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] ${
+        className={`w-full h-full rounded-full border border-white/25 backdrop-blur-[1.5px] shadow-[0_4px_14px_0_rgba(14,165,233,0.25),inset_0_1px_2px_0_rgba(255,255,255,0.25)] transition-all duration-300 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] ${
           isHoveringClickable
-            ? 'scale-[1.5] border-sky-400/20 bg-sky-500/5 shadow-[0_6px_16px_0_rgba(56,189,248,0.12),inset_0_1px_3px_0_rgba(255,255,255,0.2)]'
-            : 'scale-100 bg-white/[0.01]'
+            ? 'scale-[1.5] border-sky-400/40 bg-sky-500/10 shadow-[0_8px_20px_0_rgba(56,189,248,0.25),inset_0_1.5px_3px_0_rgba(255,255,255,0.35)]'
+            : 'scale-100 bg-white/[0.05]'
         }`}
       >
         {/* iOS style specular bubble reflection glint */}
-        <div className="absolute top-1 left-1 w-1.5 h-0.5 bg-white/15 rounded-full rotate-[-15deg] blur-[0.2px]" />
-        <div className="absolute bottom-1 right-1 w-0.5 h-0.5 bg-sky-300/5 rounded-full blur-[0.1px]" />
+        <div className="absolute top-1 left-1.5 w-1.5 h-0.5 bg-white/30 rounded-full rotate-[-15deg] blur-[0.2px]" />
+        <div className="absolute bottom-1 right-1.5 w-0.5 h-0.5 bg-sky-300/15 rounded-full blur-[0.1px]" />
       </div>
     </div>
   );
