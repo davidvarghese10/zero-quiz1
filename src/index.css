@@ -10,10 +10,23 @@
   --color-brand-dark: #0f172a; /* Slate 900 */
   --color-brand-medium: #1e293b; /* Slate 800 */
   --color-brand-light: #334155; /* Slate 700 */
-  --color-brand-accent: #38bdf8; /* Sky 400 */
-  --color-brand-accent-hover: #0ea5e9; /* Sky 500 */
+  --color-brand-accent: #0df5c4; /* Neon green-blue */
+  --color-brand-accent-hover: #02c39a; /* Deep neon teal/green-blue */
   --color-success: #4ade80; /* Green 400 */
   --color-error: #fb7185; /* Rose 400 */
+
+  /* Override Tailwind sky palette to map to neon green-blue theme */
+  --color-sky-50: #e6fffa;
+  --color-sky-100: #b3fff0;
+  --color-sky-200: #80ffe0;
+  --color-sky-300: #4dffd1;
+  --color-sky-400: #0df5c4; /* primary neon green-blue */
+  --color-sky-500: #02c39a; /* core accent hover */
+  --color-sky-600: #00bfa5;
+  --color-sky-700: #00897b;
+  --color-sky-800: #00695c;
+  --color-sky-900: #004d40;
+  --color-sky-950: #022422; /* deep teal/cyan background base */
 }
 
 /* Custom styled scrollbars for the history and admin panels */
@@ -81,10 +94,10 @@ body {
 
 /* Liquid button styling */
 .liquid-btn {
-  background: linear-gradient(180deg, rgba(56, 189, 248, 0.95), rgba(14, 165, 233, 0.95)) !important;
+  background: linear-gradient(180deg, rgba(13, 245, 196, 0.95), rgba(2, 195, 154, 0.95)) !important;
   border: 1px solid rgba(255, 255, 255, 0.3) !important;
   box-shadow: 
-    0 4px 18px rgba(14, 165, 233, 0.35),
+    0 4px 18px rgba(2, 195, 154, 0.35),
     inset 0 2px 2px rgba(255, 255, 255, 0.4),
     inset 0 -2px 4px rgba(0, 0, 0, 0.15) !important;
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
@@ -95,7 +108,7 @@ body {
 .liquid-btn:hover {
   transform: translateY(-2px) scale(1.03);
   box-shadow: 
-    0 8px 24px rgba(14, 165, 233, 0.5),
+    0 8px 24px rgba(2, 195, 154, 0.5),
     inset 0 3px 3px rgba(255, 255, 255, 0.5) !important;
   filter: brightness(1.1);
 }
@@ -103,7 +116,7 @@ body {
 .liquid-btn:active {
   transform: translateY(1px) scale(0.97);
   box-shadow: 
-    0 2px 8px rgba(14, 165, 233, 0.25),
+    0 2px 8px rgba(2, 195, 154, 0.25),
     inset 0 1px 1px rgba(255, 255, 255, 0.2) !important;
 }
 
@@ -134,8 +147,8 @@ body {
 
 /* Active team row highlights */
 .active-team-row {
-  border-left: 4px solid #38bdf8 !important;
-  background: linear-gradient(90deg, rgba(56, 189, 248, 0.1), transparent) !important;
+  border-left: 4px solid #0df5c4 !important;
+  background: linear-gradient(90deg, rgba(13, 245, 196, 0.1), transparent) !important;
 }
 
 /* Completed grid item override */

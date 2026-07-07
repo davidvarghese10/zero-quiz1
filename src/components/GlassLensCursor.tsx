@@ -66,9 +66,9 @@ export default function GlassLensCursor() {
     >
       {/* Outer liquid lens with reflection highlights */}
       <div
-        className={`w-full h-full rounded-full border border-white/25 backdrop-blur-[1.5px] shadow-[0_4px_14px_0_rgba(14,165,233,0.25),inset_0_1px_2px_0_rgba(255,255,255,0.25)] transition-all duration-300 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] ${
+        className={`w-full h-full rounded-full border border-white/25 backdrop-blur-[1.5px] shadow-[0_4px_14px_0_rgba(13,245,196,0.35),inset_0_1px_2px_0_rgba(255,255,255,0.25)] transition-all duration-300 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] ${
           isHoveringClickable
-            ? 'scale-[1.5] border-sky-400/40 bg-sky-500/10 shadow-[0_8px_20px_0_rgba(56,189,248,0.25),inset_0_1.5px_3px_0_rgba(255,255,255,0.35)]'
+            ? 'scale-[1.5] border-sky-400/40 bg-sky-500/10 shadow-[0_8px_20px_0_rgba(13,245,196,0.45),inset_0_1.5px_3px_0_rgba(255,255,255,0.35)]'
             : 'scale-100 bg-white/[0.05]'
         }`}
       >
