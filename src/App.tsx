@@ -164,6 +164,7 @@ export default function App() {
     setTeams(updatedTeams);
     setQuestions(updatedQuestions);
     advanceTurn(updatedTeams);
+    setActiveTab('standings');
   };
 
   // Incorrect answer callback
@@ -229,6 +230,7 @@ export default function App() {
     setTeams(updatedTeams);
     setQuestions(updatedQuestions);
     advanceTurn(updatedTeams);
+    setActiveTab('standings');
   };
 
   // Pass Incorrect answer callback
@@ -270,6 +272,7 @@ export default function App() {
 
     setQuestions(updatedQuestions);
     advanceTurn(teams);
+    setActiveTab('standings');
   };
 
   // --- OVERRIDES (From Coordinator Panel) ---
