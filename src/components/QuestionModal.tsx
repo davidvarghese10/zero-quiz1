@@ -28,27 +28,6 @@ export default function QuestionModal({
   const [showAnswer, setShowAnswer] = useState(false);
   const [passMode, setPassMode] = useState(false);
   const [passTeamId, setPassTeamId] = useState<string>('');
-  const [typedAnswer, setTypedAnswer] = useState('');
-  const [verificationResult, setVerificationResult] = useState<'correct' | 'incorrect' | null>(null);
-
-  const handleVerifyAnswer = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!typedAnswer.trim()) return;
-
-    const cleanStr = (str: string) =>
-      str
-        .toLowerCase()
-        .replace(/[^a-z0-9]/g, '')
-        .trim();
-
-    const isMatch = cleanStr(typedAnswer) === cleanStr(question.answerText);
-    if (isMatch) {
-      setVerificationResult('correct');
-      setShowAnswer(true);
-    } else {
-      setVerificationResult('incorrect');
-    }
-  };
 
   const activeTeam = teams[activeTeamIndex];
   const otherTeams = teams.filter(t => t.id !== activeTeam?.id);
@@ -171,47 +150,7 @@ export default function QuestionModal({
             </div>
           </div>
 
-          {/* Answer Input Section */}
-          <div className="bg-slate-950/40 border border-slate-800/80 rounded-xl p-5 space-y-3 glass shadow-inner" id="answer-submission-section">
-            <h4 className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5 font-mono">
-              <span>✍️ Submit Answer for Turn: {activeTeam ? activeTeam.name : 'Unknown'}</span>
-            </h4>
-            <form onSubmit={handleVerifyAnswer} className="flex flex-col sm:flex-row gap-2">
-              <input
-                type="text"
-                placeholder="Type the team's answer here to verify..."
-                value={typedAnswer}
-                onChange={(e) => {
-                  setTypedAnswer(e.target.value);
-                  if (verificationResult) setVerificationResult(null);
-                }}
-                className="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-colors"
-                id="input-typed-answer"
-                disabled={showAnswer && verificationResult === 'correct'}
-              />
-              <button
-                type="submit"
-                className="bg-sky-500 hover:bg-sky-400 disabled:opacity-50 text-slate-950 font-black text-xs px-5 py-2.5 rounded-xl transition-all shadow-md cursor-pointer shrink-0"
-                id="btn-verify-answer"
-                disabled={showAnswer && verificationResult === 'correct'}
-              >
-                Verify Answer
-              </button>
-            </form>
 
-            {verificationResult === 'correct' && (
-              <div className="flex items-center gap-2 p-3 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold rounded-lg">
-                <Check className="w-4 h-4 shrink-0 text-emerald-400" />
-                <span>Excellent! That's correct. Click the "Correct" button below to award points!</span>
-              </div>
-            )}
-            {verificationResult === 'incorrect' && (
-              <div className="flex items-center gap-2 p-3 bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs font-bold rounded-lg">
-                <X className="w-4 h-4 shrink-0 text-rose-400" />
-                <span>Incorrect! Try a different answer or pass/reveal the answer.</span>
-              </div>
-            )}
-          </div>
 
           {/* Answer Box */}
           <div className="pt-4" id="answer-reveal-area">
