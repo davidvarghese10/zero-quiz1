@@ -1,0 +1,6 @@
+{
+  "name": "Zero Points Quiz",
+  "description": "An interactive scoreboard and master controller for the '0' Points Quiz event, featuring dynamic leaderboards, turn management, grid selection, and an admin override panel.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

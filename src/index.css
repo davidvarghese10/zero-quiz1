@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Sleek Interface Theme Colors */
+  --color-brand-dark: #0f172a; /* Slate 900 */
+  --color-brand-medium: #1e293b; /* Slate 800 */
+  --color-brand-light: #334155; /* Slate 700 */
+  --color-brand-accent: #38bdf8; /* Sky 400 */
+  --color-brand-accent-hover: #0ea5e9; /* Sky 500 */
+  --color-success: #4ade80; /* Green 400 */
+  --color-error: #fb7185; /* Rose 400 */
+}
+
+/* Custom styled scrollbars for the history and admin panels */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* Base body styles */
+body {
+  background-color: #0f172a; /* Sleek Interface background: Slate 900 */
+  color: #f1f5f9; /* Slate 100 */
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.text-display {
+  font-family: var(--font-display);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Glassmorphism styling */
+.glass {
+  background: rgba(30, 41, 59, 0.7) !important;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Liquid glassmorphism layout classes */
+.liquid-glass {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.75), rgba(15, 23, 42, 0.85)) !important;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 
+    0 12px 40px 0 rgba(0, 0, 0, 0.4),
+    inset 0 2px 4px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -12px 24px -6px rgba(0, 0, 0, 0.2) !important;
+  border-radius: 1.25rem;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.liquid-glass:hover {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 
+    0 20px 50px 0 rgba(0, 0, 0, 0.5),
+    inset 0 3px 6px 0 rgba(255, 255, 255, 0.25),
+    inset 0 -12px 24px -6px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Liquid button styling */
+.liquid-btn {
+  background: linear-gradient(180deg, rgba(56, 189, 248, 0.95), rgba(14, 165, 233, 0.95)) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 
+    0 4px 18px rgba(14, 165, 233, 0.35),
+    inset 0 2px 2px rgba(255, 255, 255, 0.4),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.15) !important;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  color: #0f172a !important;
+  font-weight: 800 !important;
+}
+
+.liquid-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 
+    0 8px 24px rgba(14, 165, 233, 0.5),
+    inset 0 3px 3px rgba(255, 255, 255, 0.5) !important;
+  filter: brightness(1.1);
+}
+
+.liquid-btn:active {
+  transform: translateY(1px) scale(0.97);
+  box-shadow: 
+    0 2px 8px rgba(14, 165, 233, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Glass node highlighter */
+.glass-specular-highlight {
+  position: relative;
+}
+.glass-specular-highlight::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  pointer-events: none;
+}
+
+/* Shake animation for errors */
+@keyframes shake-subtle {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+.animate-shake {
+  animation: shake-subtle 0.2s ease-in-out 2;
+}
+
+/* Active team row highlights */
+.active-team-row {
+  border-left: 4px solid #38bdf8 !important;
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.1), transparent) !important;
+}
+
+/* Completed grid item override */
+.point-box-done {
+  opacity: 0.35 !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.1) !important;
+  background-color: #020617 !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.point-box-done::after {
+  content: '✕';
+  position: absolute;
+  color: #fb7185; /* Error/Muted cross color */
+  font-size: 1.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+/* Animations for quiz card items */
+@keyframes pulse-subtle {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.02); opacity: 0.95; }
+}
+
+.pulse-selected {
+  animation: pulse-subtle 2s infinite ease-in-out;
+}
+
