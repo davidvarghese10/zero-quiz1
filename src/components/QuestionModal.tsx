@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Question, Team } from '../types';
-import { HelpCircle, Check, X, ArrowLeftRight, Eye, Play, CornerDownRight, RotateCcw } from 'lucide-react';
+import { HelpCircle, Check, X, ArrowLeftRight, Eye, Play, CornerDownRight, RotateCcw, Timer, Pause } from 'lucide-react';
 
 interface QuestionModalProps {
   question: Question;
@@ -29,6 +29,36 @@ export default function QuestionModal({
   const [passMode, setPassMode] = useState(false);
   const [passTeamId, setPassTeamId] = useState<string>('');
 
+  const isEasy = question.points <= 40;
+  const initialTime = isEasy ? 30 : 60;
+  const [secondsLeft, setSecondsLeft] = useState(initialTime);
+  const [isTimerActive, setIsTimerActive] = useState(true);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
+    if (isTimerActive && secondsLeft > 0) {
+      interval = setInterval(() => {
+        setSecondsLeft((prev) => prev - 1);
+      }, 1000);
+    } else if (secondsLeft === 0) {
+      setIsTimerActive(false);
+    }
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [isTimerActive, secondsLeft]);
+
+  const handleResetTimer = () => {
+    setSecondsLeft(initialTime);
+    setIsTimerActive(true);
+  };
+
+  const handleToggleTimer = () => {
+    setIsTimerActive(!isTimerActive);
+  };
+
+  const percentage = (secondsLeft / initialTime) * 100;
+
   const activeTeam = teams[activeTeamIndex];
   const otherTeams = teams.filter(t => t.id !== activeTeam?.id);
 
@@ -52,7 +82,7 @@ export default function QuestionModal({
 
   const handleIncorrect = () => {
     onAnswerIncorrect(question, activeTeam.id);
-    // Don't close immediately in case they want to pass next!
+    onClose();
   };
 
   const handlePassCorrect = () => {
@@ -141,6 +171,83 @@ export default function QuestionModal({
 
         {/* Question Text */}
         <div className="p-8 space-y-6" id="modal-body">
+          {/* Neon Timer Section */}
+          <div className="bg-slate-950/60 border border-slate-800/80 rounded-xl p-4 flex flex-col md:flex-row items-center justify-between gap-4 glass shadow-inner" id="timer-box">
+            <div className="flex items-center gap-3 w-full md:w-auto">
+              <div className={`p-2.5 rounded-lg flex items-center justify-center shrink-0 ${
+                secondsLeft <= 10 
+                  ? 'bg-rose-500/10 text-rose-400 border border-rose-500/20 animate-pulse' 
+                  : 'bg-sky-500/10 text-sky-400 border border-sky-500/20'
+              }`}>
+                <Timer className="w-5 h-5" />
+              </div>
+              <div className="flex-1 md:flex-initial">
+                <div className="flex items-baseline gap-2">
+                  <span className={`text-2xl font-mono font-black tracking-wider ${
+                    secondsLeft <= 10 ? 'text-rose-400 animate-pulse' : 'text-slate-100'
+                  }`}>
+                    00:{secondsLeft.toString().padStart(2, '0')}
+                  </span>
+                  <span className="text-[10px] text-slate-400 uppercase tracking-widest font-mono">
+                    ({isEasy ? 'Easy Qn - 30s' : 'Hard Qn - 60s'})
+                  </span>
+                </div>
+                <div className="text-[11px] text-slate-400 font-medium">
+                  {secondsLeft === 0 ? (
+                    <span className="text-rose-400 font-bold uppercase animate-bounce">🚨 Time's Up!</span>
+                  ) : (
+                    <span>Time remaining to answer</span>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Progress Bar */}
+            <div className="w-full flex-1 max-w-md bg-slate-900 border border-slate-800/60 h-2.5 rounded-full overflow-hidden relative" id="timer-progress-bar-container">
+              <div 
+                className={`h-full rounded-full transition-all duration-1000 ease-linear ${
+                  secondsLeft <= 10 ? 'bg-rose-50 shadow-[0_0_10px_rgba(251,113,133,0.5)]' : 'bg-sky-400 shadow-[0_0_10px_rgba(13,245,196,0.5)]'
+                }`}
+                style={{ width: `${percentage}%` }}
+                id="timer-progress-bar"
+              />
+            </div>
+
+            {/* Timer Controls */}
+            <div className="flex items-center gap-2 shrink-0 w-full md:w-auto justify-end" id="timer-controls">
+              <button
+                onClick={handleToggleTimer}
+                disabled={secondsLeft === 0}
+                className={`p-2 rounded-lg border transition-all text-xs font-bold flex items-center gap-1 cursor-pointer disabled:opacity-40 ${
+                  isTimerActive 
+                    ? 'bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border-amber-500/20' 
+                    : 'bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border-emerald-500/20'
+                }`}
+                id="btn-timer-toggle"
+              >
+                {isTimerActive ? (
+                  <>
+                    <Pause className="w-3.5 h-3.5 animate-pulse" />
+                    <span>Pause</span>
+                  </>
+                ) : (
+                  <>
+                    <Play className="w-3.5 h-3.5" />
+                    <span>Resume</span>
+                  </>
+                )}
+              </button>
+              <button
+                onClick={handleResetTimer}
+                className="p-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700/50 rounded-lg text-xs font-bold flex items-center gap-1 cursor-pointer transition-colors"
+                id="btn-timer-reset"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+                <span>Reset</span>
+              </button>
+            </div>
+          </div>
+
           <div className="space-y-3">
             <div className="flex items-start gap-3">
               <HelpCircle className="w-6 h-6 text-slate-500 mt-1 shrink-0" />

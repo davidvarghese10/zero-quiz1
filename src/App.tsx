@@ -192,7 +192,17 @@ export default function App() {
       return team;
     });
 
+    const updatedQuestions = questions.map((q) => {
+      if (q.id === question.id) {
+        return { ...q, isCompleted: true, solvedByTeamId: null };
+      }
+      return q;
+    });
+
     setTeams(updatedTeams);
+    setQuestions(updatedQuestions);
+    advanceTurn(updatedTeams);
+    setActiveTab('standings');
   };
 
   // Pass Correct answer callback
